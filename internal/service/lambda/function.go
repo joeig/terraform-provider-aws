@@ -976,7 +976,7 @@ func resourceFunctionUpdate(ctx context.Context, d *schema.ResourceData, meta in
 
 		output := outputRaw.(*lambda.PublishVersionOutput)
 
-		err = lambda.NewFunctionUpdatedWaiter(conn).Wait(ctx, &lambda.GetFunctionConfigurationInput{
+		err = lambda.NewFunctionActiveWaiter(conn).Wait(ctx, &lambda.GetFunctionConfigurationInput{
 			FunctionName: output.FunctionArn,
 			Qualifier:    output.Version,
 		}, d.Timeout(schema.TimeoutUpdate))
